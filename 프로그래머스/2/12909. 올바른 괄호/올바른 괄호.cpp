@@ -7,7 +7,8 @@ bool solution(string s)
 {
     bool answer = true;
     stack<char> st;
-    for(char& c: s){
+    for(int i=0;i<s.size();i++){
+        char c = s.at(i);
         if(c=='(')
             st.push(c);
         else if(c==')'){
