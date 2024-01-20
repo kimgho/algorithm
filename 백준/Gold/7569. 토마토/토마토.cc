@@ -2,14 +2,15 @@
 #include <queue>
 #include <algorithm>
 using namespace std;
-#define io ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-int graph[101][101][101];
-bool visited[101][101][101];
-queue<pair<pair<int, int>, int>> q;
-int dx[] = {0, 0, -1, 1, 0, 0};
-int dy[] = {-1, 1, 0, 0, 0, 0};
+#define io ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0)
+#define MAX 101
+int m, n, h, days = 0;
+int tomato[MAX][MAX][MAX];
+bool visited[MAX][MAX][MAX];
+int dx[] = {-1, 1, 0, 0, 0, 0};
+int dy[] = {0, 0, -1, 1, 0, 0};
 int dz[] = {0, 0, 0, 0, -1, 1};
-int m, n, h, day = 0;
+queue<pair<pair<int, int>, int>> q;
 void bfs()
 {
     while (!q.empty())
@@ -23,11 +24,11 @@ void bfs()
             int nx = x + dx[i];
             int ny = y + dy[i];
             int nz = z + dz[i];
-            if (nx < 0 || ny < 0 || nz < 0 || nx >= n || ny >= m || nz >= h || graph[nx][ny][nz] == -1)
+            if (nx < 0 || ny < 0 || nz < 0 || nx >= n || ny >= m || nz >= h || tomato[nx][ny][nz] == -1)
                 continue;
-            if (graph[nx][ny][nz] == 0)
+            if (tomato[nx][ny][nz] == 0)
             {
-                graph[nx][ny][nz] = graph[x][y][z] + 1;
+                tomato[nx][ny][nz] = tomato[x][y][z] + 1;
                 q.push({{nx, ny}, nz});
             }
         }
@@ -43,9 +44,8 @@ int main()
         {
             for (int j = 0; j < m; j++)
             {
-
-                cin >> graph[i][j][k];
-                if (graph[i][j][k] == 1)
+                cin >> tomato[i][j][k];
+                if (tomato[i][j][k] == 1)
                 {
                     q.push({{i, j}, k});
                 }
@@ -59,15 +59,15 @@ int main()
         {
             for (int j = 0; j < m; j++)
             {
-                if (graph[i][j][k] == 0)
+                if (tomato[i][j][k] == 0)
                 {
                     cout << -1;
                     return 0;
                 }
-                day = max(day, graph[i][j][k]);
+                days = max(days, tomato[i][j][k]);
             }
         }
     }
-    cout << day - 1;
+    cout << days - 1;
     return 0;
 }
