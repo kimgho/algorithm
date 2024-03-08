@@ -1,7 +1,5 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
-#define io ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0)
 int a, b, c;
 long long solution(int b)
 {
@@ -9,7 +7,6 @@ long long solution(int b)
 }
 int main()
 {
-    io;
     cin >> a >> b >> c;
     cout << solution(b);
     return 0;
